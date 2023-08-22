@@ -319,6 +319,7 @@ int main(int argc, const char * const *argv) {
     config.yDirection = YDirection::BOTTOM_UP;
     config.edgeColoring = msdfgen::edgeColoringInkTrap;
     config.kerning = true;
+    config.padding = -1;
     const char *imageFormatName = nullptr;
     int fixedWidth = -1, fixedHeight = -1;
     config.preprocessGeometry = (
@@ -949,7 +950,8 @@ int main(int argc, const char * const *argv) {
             atlasPacker.setDimensions(fixedWidth, fixedHeight);
         else
             atlasPacker.setDimensionsConstraint(atlasSizeConstraint);
-        atlasPacker.setPadding(config.imageType == ImageType::MSDF || config.imageType == ImageType::MTSDF ? config.padding : -1);
+        // atlasPacker.setPadding(config.imageType == ImageType::MSDF || config.imageType == ImageType::MTSDF ? config.padding : -1);
+        atlasPacker.setPadding(config.padding);
         // TODO: In this case (if padding is -1), the border pixels of each glyph are black, but still computed. For floating-point output, this may play a role.
         if (fixedScale)
             atlasPacker.setScale(config.emSize);
